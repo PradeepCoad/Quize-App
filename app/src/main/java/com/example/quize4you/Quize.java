@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class Quize extends AppCompatActivity {
     int q=1;
+    int score = 0;
     int ans=0;
     int[] rightAnswers = {2,2,1,4,3,1,4,2,4,2};
     int[] filledAnswers = {0,0,0,0,0,0,0,0,0,0};
@@ -44,10 +45,18 @@ public class Quize extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(q>=10){
+                if(q>=9){
                     next.setText(R.string.submit);
+                }
+                if(q>=10){
                     Intent answerPage = new Intent(getApplicationContext(),RightResult.class);
+                    score = (int)(Math.random()*10);
+                    if(score == 0){
+                        score =(int)(Math.random()*10);
+                    }
+                    answerPage.putExtra("score",score);
                     startActivity(answerPage);
+                    finish();
                 }else {
                     q++;
                     String s = String.valueOf(q);
